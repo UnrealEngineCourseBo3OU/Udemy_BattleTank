@@ -29,8 +29,23 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void SetTurretChildActor(UChildActorComponent* TurretFromBP);
+	UFUNCTION(BlueprintCallable)
+		void SetBarrelChildActor(UChildActorComponent* BarrelFromBP);
+	UFUNCTION(BlueprintCallable)
+		void SetBodyChildActor(UChildActorComponent * BodyFromBP);
 
 private : 
-	UChildActorComponent* Turret=nullptr;
-	void RotateTurret();
+	UChildActorComponent* Turret =nullptr;
+	UChildActorComponent* Barrel = nullptr;
+	UChildActorComponent* Body = nullptr;
+
+	void RotateTurret(float);
+	void RotateBarrel(float);
+	void RotateTank(float);
+	void MoveTank(float);
+
+	UPROPERTY(EditAnywhere)
+		float RotationSpeed;
+	UPROPERTY(EditAnywhere)
+		float MovementSpeed;
 };

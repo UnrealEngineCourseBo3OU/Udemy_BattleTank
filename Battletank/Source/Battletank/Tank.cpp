@@ -30,20 +30,54 @@ void ATank::Tick(float DeltaTime)
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	InputComponent->BindAction("Turret_Clockwise", IE_Pressed, this, &ATank::RotateTurret);
-	InputComponent->BindAction("Turret_CounterClockwise", IE_Pressed, this, &ATank::RotateTurret);
+	InputComponent->BindAxis("Rotate_Turret", this, &ATank::RotateTurret);
+	InputComponent->BindAxis("Rotate_Barrel", this, &ATank::RotateBarrel);
+	InputComponent->BindAxis("Rotate_Tank", this, &ATank::RotateTank);
+	InputComponent->BindAxis("Move_Tank", this, &ATank::MoveTank);
+
 }
 
-void ATank::RotateTurret()
+void ATank::RotateTurret(float speed)
 {
-	UE_LOG(LogTemp, Warning, TEXT("RotateTurret Called"));
 	if (!Turret) { return; }
-	Turret->SetWorldRotation(FRotator(0.0f, 10.0f, 0.0f));
-		
+	float Rotation;
+	Rotation = GetWorld()->DeltaTimeSeconds * speed * RotationSpeed;
+	Turret->AddWorldRotation(FRotator(0.0f, Rotation, 0.0f));
 }
+void ATank::RotateBarrel(float speed)
+{
+	if (!Barrel) { return; }
+	float Rotation;
+	Rotation = GetWorld()->DeltaTimeSeconds * speed * RotationSpeed;
+	Barrel->AddWorldRotation(FRotator(Rotation, 0.0f, 0.0f));
+}
+void ATank::RotateTank(float speed)
+{
+	if (!Body) { return; }
+	float Rotation;
+	Rotation = GetWorld()->DeltaTimeSeconds * speed * RotationSpeed;
+	Body->AddWorldRotation(FRotator(0.0f,Rotation, 0.0f));
+}
+void ATank::MoveTank(float speed)
+{
+	if (!Body) { return; }
+	float Distance;
+	Distance = GetWorld()->DeltaTimeSeconds * speed * MovementSpeed;
+	Body->AddRelativeLocation(Body->GetForwardVector() * Distance);
+	//Body->AddWorldLocation();
+}
+
+
 
 void ATank::SetTurretChildActor(UChildActorComponent * TurretFromBP)
 {
-	UE_LOG(LogTemp, Warning, TEXT("SetTturretChildActor Called"));
 		Turret = TurretFromBP;
+}
+void ATank::SetBodyChildActor(UChildActorComponent * BodyFromBP)
+{
+		Body = BodyFromBP;
+}
+void ATank::SetBarrelChildActor(UChildActorComponent * BarrelFromBP)
+{
+	    Barrel = BarrelFromBP;
 }
