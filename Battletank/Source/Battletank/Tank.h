@@ -28,16 +28,19 @@ public:
 	
 
 	UFUNCTION(BlueprintCallable)
-		void SetTurretChildActor(UChildActorComponent* TurretFromBP);
+		void SetTurretChildActor(UStaticMeshComponent* TurretFromBP);
 	UFUNCTION(BlueprintCallable)
-		void SetBarrelChildActor(UChildActorComponent* BarrelFromBP);
+		void SetBarrelChildActor(UStaticMeshComponent* BarrelFromBP);
 	UFUNCTION(BlueprintCallable)
-		void SetBodyChildActor(UChildActorComponent * BodyFromBP);
+		void SetBodyChildActor(UStaticMeshComponent * BodyFromBP);
 
 private : 
-	UChildActorComponent* Turret =nullptr;
-	UChildActorComponent* Barrel = nullptr;
-	UChildActorComponent* Body = nullptr;
+	UChildActorComponent* Turret1 =nullptr;
+	UChildActorComponent* Barrel1 = nullptr;
+	UChildActorComponent* Body1 = nullptr;
+	UStaticMeshComponent* Turret = nullptr;
+	UStaticMeshComponent* Barrel = nullptr;
+	UStaticMeshComponent* Body = nullptr;
 
 	void RotateTurret(float);
 	void RotateBarrel(float);

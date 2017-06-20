@@ -69,15 +69,15 @@ void ATank::MoveTank(float speed)
 
 
 
-void ATank::SetTurretChildActor(UChildActorComponent * TurretFromBP)
+void ATank::SetTurretChildActor(UStaticMeshComponent * TurretFromBP)
 {
 		Turret = TurretFromBP;
 }
-void ATank::SetBodyChildActor(UChildActorComponent * BodyFromBP)
+void ATank::SetBodyChildActor(UStaticMeshComponent * BodyFromBP)
 {
 		Body = BodyFromBP;
 }
-void ATank::SetBarrelChildActor(UChildActorComponent * BarrelFromBP)
+void ATank::SetBarrelChildActor(UStaticMeshComponent * BarrelFromBP)
 {
 	    Barrel = BarrelFromBP;
 }
